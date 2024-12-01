@@ -180,6 +180,12 @@ public class EmojiBubblesApp extends JFrame implements MouseListener {
 		if (e.getSource() == elAddPlayer) {
 			// add new player with his name to arrayList
 			lastPlayerName = JOptionPane.showInputDialog(null, "Enter player name");
+
+			// make sure a player is not created if no name is provided
+			if (lastPlayerName == null || lastPlayerName.trim().isEmpty()) {
+	                System.out.println("No name found");
+	                return;
+	           	}
 			namesArrayList.add(new EmojiLabel("" + playerNum++, lastPlayerName));
 			
 			if (isDataCollectionPermitted ) {
