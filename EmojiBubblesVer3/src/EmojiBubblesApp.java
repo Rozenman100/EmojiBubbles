@@ -214,6 +214,10 @@ public class EmojiBubblesApp extends JFrame implements MouseListener {
 			if (isDataCollectionPermitted) {
 			statisticData.setDurationOfPlay(durationStatistics.getCurrentTime());
 			System.out.println(statisticData);
+
+			// add date and time to statistic data object
+			java.util.Date date = new java.util.Date();
+			statisticData.setDate(date);
 			}
 			
 			// send StatisticData to server
