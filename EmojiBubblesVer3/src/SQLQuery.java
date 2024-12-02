@@ -49,7 +49,7 @@ public class SQLQuery {
 
 
 	public static boolean insertStatisticData(StatisticData statData) {
-	    String sql = "INSERT INTO statisticdata (numberofplayers, שמחה, רגע, עצב, חזקה, פחד, כעס, durationofplay) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	    String sql = "INSERT INTO statisticdata (numberofplayers, שמחה, רגע, עצב, חזקה, פחד, כעס, durationofplay, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	    try (PreparedStatement pstmt = con.prepareStatement(sql)) {
 	        // Set the number of players
@@ -65,6 +65,10 @@ public class SQLQuery {
 
 	        // Set the duration of play
 	        pstmt.setInt(8, statData.getDurationOfPlay());
+	        
+	        // set the date of play
+	        java.sql.Timestamp timestamp = new java.sql.Timestamp(statData.getDate().getTime());
+	        pstmt.setTimestamp(9, timestamp);
 
 	        // Execute the query
 	        int affectedRows = pstmt.executeUpdate();
