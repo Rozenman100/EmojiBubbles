@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +9,8 @@ public class StatisticData implements Serializable {
 	private int playerCounter;
 	private Map<Color, Integer> colorUsageCounter;
 	private int durationOfPlay;
-
+	private Date date;
+	
 	public StatisticData() {
 		
 		this.colorUsageCounter = new HashMap<Color, Integer>();
@@ -55,6 +57,16 @@ public class StatisticData implements Serializable {
 
 	public void setDurationOfPlay(int durationOfPlay) {
 		this.durationOfPlay = durationOfPlay;
+	}
+	
+	
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	@Override

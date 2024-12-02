@@ -180,12 +180,12 @@ public class EmojiBubblesApp extends JFrame implements MouseListener {
 		if (e.getSource() == elAddPlayer) {
 			// add new player with his name to arrayList
 			lastPlayerName = JOptionPane.showInputDialog(null, "Enter player name");
-			
+
+			// make sure a player is not created if no name is provided
 			if (lastPlayerName == null || lastPlayerName.trim().isEmpty()) {
-				System.out.println("No name found");
-				return;
-			}
-			
+	                System.out.println("No name found");
+	                return;
+	           	}
 			namesArrayList.add(new EmojiLabel("" + playerNum++, lastPlayerName));
 			
 			if (isDataCollectionPermitted ) {
@@ -214,6 +214,10 @@ public class EmojiBubblesApp extends JFrame implements MouseListener {
 			if (isDataCollectionPermitted) {
 			statisticData.setDurationOfPlay(durationStatistics.getCurrentTime());
 			System.out.println(statisticData);
+
+			// add date and time to statistic data object
+			java.util.Date date = new java.util.Date();
+			statisticData.setDate(date);
 			}
 			
 			// send StatisticData to server
