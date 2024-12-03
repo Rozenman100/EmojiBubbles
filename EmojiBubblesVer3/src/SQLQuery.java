@@ -78,6 +78,23 @@ public class SQLQuery {
 	        return false; // Return false if something goes wrong
 	    }
 	}
+	
+	public static ResultSet fetchStatisticData() {
+	    // SQL query to fetch data from the last month
+	    String sql = "SELECT numberofplayers, שמחה, רגע, עצב, חזקה, פחד, כעס, durationofplay, date " +
+	                 "FROM statisticdata " +
+	                 "WHERE date >= CURDATE() - INTERVAL 1 MONTH"; // Fetch data for the last month
+
+	    try {
+	        Statement stmt = con.createStatement();
+	        return stmt.executeQuery(sql); // Return the ResultSet to the caller
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null; // Return null in case of an error
+	    }
+	}
+
+
 
 	
 
@@ -95,8 +112,8 @@ public class SQLQuery {
 	public static void main(String[] args) {
 		SQLQuery.connect("root", "123456");
 
-		FeedbackData fbData=new FeedbackData(true, 4, 5.6f, "do we actually exist?");
-		SQLQuery.insertFeedback(fbData);
+		//FeedbackData fbData=new FeedbackData(true, 4, 5.6f, "do we actually exist?");
+		SQLQuery.fetchStatisticData();
 
 		SQLQuery.disconnect();
 
