@@ -104,8 +104,8 @@ public class EmotionConversationPanel extends JPanel implements MouseListener {
 		lblDoubleRiskGame.addMouseListener(this);
 
 		lblRegularGame.setToolTipText("each bubble you explode is 1 point");
-		lblRiskGame.setToolTipText("each buuble is 2 points, each miss is 1 point");
-		lblDoubleRiskGame.setToolTipText("get x2 points or time of bubble size");
+		lblRiskGame.setToolTipText("each buuble is 2 points, each miss is 1 points");
+		lblDoubleRiskGame.setToolTipText("each buuble is 4 points, each miss is 2 points");
 		
 		pnlPlay.add(lblchooseGameOption);
 		pnlPlay.add(lblRegularGame);
