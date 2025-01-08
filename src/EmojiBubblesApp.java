@@ -28,7 +28,7 @@ public class EmojiBubblesApp extends JFrame implements MouseListener {
 	private StatisticData statisticData;
 
 	private JPanel mainPanel, pnlPlayerturnName, pnlMiddle, pnlButtons, pnlPlayers;
-	private JLabel lblPlayerName, lblTheTurnOf, lblClock, lblDisplayTime;
+	private JLabel lblPlayerName,lblPlayerInstructions, lblTheTurnOf, lblClock, lblDisplayTime;
 	private JLabel lblEndGame;
 
 	private EmojiLabel elAddPlayer, currentPlayer;
@@ -74,7 +74,7 @@ public class EmojiBubblesApp extends JFrame implements MouseListener {
 		lblPlayerName.setFont(EmojiLabel.font);
 		pnlPlayerturnName.add(lblTheTurnOf);
 		pnlPlayerturnName.add(lblPlayerName);
-		lblDisplayTime = new JLabel();
+		
 		
 
 		// Players - > on right
@@ -90,7 +90,9 @@ public class EmojiBubblesApp extends JFrame implements MouseListener {
 		lblEndGame = new EmojiLabel("End Game");
 		pnlButtons.add(lblEndGame);
 		lblEndGame.addMouseListener(this);
+		lblClock = new JLabel();
 		pnlButtons.add(lblClock);
+		lblDisplayTime = new JLabel();
 		pnlButtons.add(lblDisplayTime);
 
 		// main panel (contain all panels)
@@ -124,8 +126,8 @@ public class EmojiBubblesApp extends JFrame implements MouseListener {
 		UIManager.put("OptionPane.messageFont", font);
 		UIManager.put("OptionPane.buttonFont", font);
 		
-//		timerFont = new Font(Font.SANS_SERIF, Font.BOLD, 40);
-//		lblDisplayTime.setFont(timerFont);
+		timerFont = new Font(Font.SANS_SERIF, Font.BOLD, 40);
+		lblDisplayTime.setFont(timerFont);
 	
 		
 		
@@ -324,6 +326,14 @@ public class EmojiBubblesApp extends JFrame implements MouseListener {
 
 	public void setDataCollectionPermitted(boolean isDataCollectionPermitted) {
 		this.isDataCollectionPermitted = isDataCollectionPermitted;
+	}
+
+	public JLabel getLblClock() {
+		return lblClock;
+	}
+
+	public void setLblClock(JLabel lblClock) {
+		this.lblClock = lblClock;
 	}
 
 

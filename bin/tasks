@@ -1,0 +1,7 @@
+Tasks:
+	1) EmojiBubblesApp: after end game is pressed - send statistic-data to server via client
+	2) RunnableEmotion: 
+		*) add to infinite while loop instance-of check to differentiate
+			between feedback-data object to statistic-data object.
+		*) call insert-Statistic via SQLQuery
+	3) Build insert-Statistic in SQLQuery class

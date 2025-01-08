@@ -31,7 +31,6 @@ public class ReadExcel {
 	}
 
 	public static EmotionData ReadEmotionData(String filename, EmotionData emotionData) {
-		String[][] dataTable = null;
 		File file = new File(filename);
 		try {
 			// Create a file input stream to read Excel workbook and worksheet
@@ -45,19 +44,17 @@ public class ReadExcel {
 				int numRows = xlSheet.getLastRowNum() + 1;
 				int numCols = 0;
 
-				// Create double array data table - rows x cols
-				// We will return this data table
-				dataTable = new String[numRows][numCols];
-
 				// For each row, create a HSSFRow, then iterate through the "columns"
 				// For each "column" create an HSSFCell to grab the value at the (i,j) cell
 				// i=1 -> to skip first row with columns names
 				for (int i = 1; i < numRows; i++) {
 
-					// count columns
-					numCols = xlSheet.getRow(i).getLastCellNum();
-
 					HSSFRow xlRow = xlSheet.getRow(i);
+					
+					// count columns
+					numCols = xlRow.getLastCellNum();
+
+					
 
 					for (int j = 0; j < numCols; j++) {
 						HSSFCell xlCell = xlRow.getCell(j);
@@ -70,17 +67,20 @@ public class ReadExcel {
 						else // emotion questions
 							emotionData.getEmotionResultArraylist().get(x).getEmotionsArraylist().get(i - 1)
 									.addQuestion(xlCell.toString());
-						// dataTable[i][j] = xlCell.toString();
 					} // end for of columns
 
 				} // end for of rows
 
 			} // end for of sheet
+			
+			xlwb.close();
+			
 		} catch (IOException e) {
 			System.out.println("ERROR FILE HANDLING " + e.toString());
 		}
+		
 		return emotionData;
-	}
+	}	
 
 	public static void main(String args[]) {
 

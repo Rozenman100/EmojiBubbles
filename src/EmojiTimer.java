@@ -34,14 +34,15 @@ public class EmojiTimer {
 		          String newText = "Time: " + currentTime;
 		          EmojiBubblesApp.getMainObject().getLblDisplayTime().setText(newText);
 		          
-		          // EmojiBubblesApp.getMainObject().setLblClock(new JLabel(new ImageIcon("images/clock.png")));
-		          
+		          EmojiBubblesApp.getMainObject().getLblClock().setIcon(new ImageIcon("images/clock.png"));
+		          EmojiBubblesApp.getMainObject().validate();
 		          
 		          
 		          if (currentTime <= 0) {
 		        	  System.out.println("no time left");
 		        	  newText = "";
-			          EmojiBubblesApp.getMainObject().getLblDisplayTime().setText(newText);;
+			          EmojiBubblesApp.getMainObject().getLblDisplayTime().setText(newText);
+			          EmojiBubblesApp.getMainObject().getLblClock().setIcon(null);
 		        	  
 		        	  controlledPanel.removeAll();
 		        	  controlledPanel.add(new JLabel(new ImageIcon("images/red.png")), BorderLayout.CENTER);

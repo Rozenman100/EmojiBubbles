@@ -16,7 +16,7 @@ public class SQLQuery {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/EmojiBubblesDB?useSSL=false", username, password);
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/EmojiBubblesDB?allowPublicKeyRetrieval=true&useSSL=false", username, password);
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -75,7 +75,34 @@ public class SQLQuery {
 	    }
 	}
 
+	public static ResultSet fetchStatisticData() {
+        // SQL query to fetch data from the last month
+        String sql = "SELECT numberofplayers, שמחה, רגע, עצב, חזקה, פחד, כעס, durationofplay, date " +
+                     "FROM statisticdata " +
+                     "WHERE date >= CURDATE() - INTERVAL 1 MONTH"; // Fetch data for the last month
+
+        try {
+            Statement stmt = con.createStatement();
+            return stmt.executeQuery(sql); // Return the ResultSet to the caller
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null; // Return null in case of an error
+        }
+    }
 	
+	// Fetch feedback data from the feedback table
+    public static ResultSet fetchFeedback() {
+        String sql = "SELECT id, enjoy, players, averageage, note, date FROM feedback";
+
+        try {
+            Statement stmt = con.createStatement();
+            return stmt.executeQuery(sql); // Return the ResultSet to the caller
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null; // Return null in case of an error
+        }
+    }
+
 
 	// disconnect
 	public static void disconnect() {
@@ -91,8 +118,29 @@ public class SQLQuery {
 	public static void main(String[] args) {
 		SQLQuery.connect("root", "123456");
 
-		FeedbackData fbData=new FeedbackData(true, 4, 5.6f, "do we actually exist?");
-		SQLQuery.insertFeedback(fbData);
+		// Fetch feedback data
+        ResultSet feedbackRs = SQLQuery.fetchFeedback();
+        if (feedbackRs != null) {
+            try {
+                while (feedbackRs.next()) {
+                    int id = feedbackRs.getInt("id");
+                    boolean enjoy = feedbackRs.getBoolean("enjoy");
+                    int players = feedbackRs.getInt("players");
+                    float averageAge = feedbackRs.getFloat("averageage");
+                    String note = feedbackRs.getString("note");
+                    Timestamp date = feedbackRs.getTimestamp("date");
+
+                    // Output the feedback data
+                    System.out.println("ID: " + id + ", Enjoy: " + enjoy + ", Players: " + players +
+                            ", Average Age: " + averageAge + ", Note: " + note + ", Date: " + date);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Failed to fetch feedback data.");
+        }
+
 
 		SQLQuery.disconnect();
 

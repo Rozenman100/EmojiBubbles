@@ -29,13 +29,13 @@ public class EmojiCursor {
 			e1.printStackTrace();
 		}
         
-        //                          -Alpha
+        // Alpha
         BufferedImage cursorImg = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
         
-        //        -Graphics2D                   
+        // Graphics2D                   
         Graphics2D g2d = cursorImg.createGraphics();
         
-        //      hints                 
+        // hints                 
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -44,9 +44,11 @@ public class EmojiCursor {
         g2d.drawImage(originalImg, 0, 0, 32, 32, null);
         g2d.dispose();
         
-        //                         
+        // 
+        int hotspotX = originalImg.getWidth() / 2;
+        int hotspotY = originalImg.getHeight() / 2;
         Cursor customCursor = Toolkit.getDefaultToolkit().createCustomCursor(
-            cursorImg, new Point(0, 0), "Custom Cursor");
+            cursorImg, new Point(hotspotX, hotspotY), "Custom Cursor");
         
         this.cursor = customCursor;
 	}
